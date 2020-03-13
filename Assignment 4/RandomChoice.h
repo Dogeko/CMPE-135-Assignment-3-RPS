@@ -8,7 +8,7 @@ using namespace std;
 
 class RandomChoice : public Bot{
 public:
-	void pick();
+    void pick(int playerChoice);
 };
 
 #endif

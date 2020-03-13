@@ -10,13 +10,13 @@ using namespace std;
 class Game
 {
 private:
-	int round;
-	Human human;
-	Bot *bot;
+    int round;
+    Human human;
+    Bot *bot;
 public:
-	void play();
-	int result(int humanChoice, int botChoice);
-	void printResult(int result);
+    void play();
+    int result(int humanChoice, int botChoice);
+    void printResult(int result);
 };
 
 #endif

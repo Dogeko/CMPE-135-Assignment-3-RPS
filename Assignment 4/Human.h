@@ -11,7 +11,7 @@ protected:
 public:
 	int getChoice();
 	void setChoice(int value);
-	void pick();
+	void playerPick();
 };
 
 #endif

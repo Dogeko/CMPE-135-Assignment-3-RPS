@@ -10,7 +10,7 @@ void Human::setChoice(int value)
 	choice = value;
 }
 
-void Human::pick()
+void Human::playerPick()
 {
 	cout << "1 = Paper, 2 = Scissors, 3 = Rock: ";
 	cin >> choice;
@@ -26,7 +26,7 @@ void Human::pick()
 		setChoice(2);
 		break;
 	default:
-		pick();
+        playerPick();
 		break;
 	}
 }

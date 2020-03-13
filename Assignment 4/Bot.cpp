@@ -10,7 +10,7 @@ void Bot::setChoice(int value)
 	choice = value;
 }
 
-void Bot::pick()
+void Bot::pick(int)
 {
 
 }

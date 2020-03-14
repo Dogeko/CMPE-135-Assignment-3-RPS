@@ -12,6 +12,8 @@ class Database
 {
 private:
     int previousChoice[5] = { 3, 3, 3, 3, 3 };
+    int choice_record[5] = {3};
+    bool check = false;
     unordered_map<int, int>dataMap;
     int recordCount = 0;
 public:

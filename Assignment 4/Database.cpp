@@ -3,33 +3,41 @@
 bool Database::recordChoice(int choice)
 {
     bool fullSequence = false;
-
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 5; i++) // return after the array hit 5
     {
         if (i < 4)
         {
             if (previousChoice[i] == 3)
             {
                 previousChoice[i] = choice;
+                choice_record[i] = choice;
                 break;
             }
-//            else
-//            {
-//                int temp[4];
-//                for (int j = 1; j < 4; j++)
-//                {
-//                    temp[j - 1] = previousChoice[j];
+//            else{
+//                for(int j = 0; j<4; j++){
+//                    previousChoice[j] = choice_record[j+1];
 //                }
-//                for (int j = 0; j < 3; j++)
-//                {
-//                    previousChoice[j] = temp[j];
-//                }
-//                previousChoice[i] = choice;
 //            }
         }
         else
         {
-            previousChoice[i] = choice;
+                if(check){
+                    for(int j = 0; j < 4; j++){
+                        previousChoice[j] = choice_record[j+1];
+                    }
+                    previousChoice[i] = choice;
+                    choice_record[i] = choice;
+                    for(int j = 0; j < 4; j++){
+                        choice_record[j] = previousChoice[j];
+                    }
+                    cout<<"Record_choice: sequence updated"<<endl;
+                }
+                else{
+                    previousChoice[i] = choice;
+                    choice_record[i] = choice;
+                    check = true;
+                    cout<<"Record_choice: check"<<endl;
+                }
             fullSequence = true;
         }
     }
@@ -45,7 +53,7 @@ int Database::sendSequence()
         SequenceString += to_string(previousChoice[i]);
         cout<<previousChoice[i];
     }
-
+    cout<<"\n";
     int Sequence = stoi(SequenceString);
     return Sequence;
 }
@@ -65,7 +73,7 @@ void Database::addSequence(int key, int value){
     for(auto& i: dataMap){
         cout<<"Added Sequence: " << i.first <<" ocurrance:"<< i.second<<endl;
     }
-    
+
 }
 
 void Database::removeSequence(int key){

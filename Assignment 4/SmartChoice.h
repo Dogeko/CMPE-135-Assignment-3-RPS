@@ -12,6 +12,7 @@ class SmartChoice : public Bot
 private:
     Database records;
     string foundSequence;
+    int smart_choice[5]= {3};
 
 public:
     void pick(int playerChoice);

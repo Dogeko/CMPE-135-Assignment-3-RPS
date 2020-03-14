@@ -21,9 +21,11 @@ public:
     bool recordChoice(int choice);
     string sendSequence();
     bool checkDataMap(string key);
+    int searchDataMap(string key);
     void addSequence(string key, int value);
     void removeSequence(string key);
     void updateSequence(string key);
+    int get_previous_choices();
 
 };
 

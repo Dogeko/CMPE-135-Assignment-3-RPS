@@ -66,6 +66,15 @@ bool Database::checkDataMap(string key){
     return keyFound;
 
 }
+int Database::searchDataMap(string key){
+    int occurance = -1;
+
+    if(checkDataMap(key)){
+         occurance =  dataMap.at(key);
+    }
+
+    return occurance;
+}
 
 void Database::addSequence(string key, int value){
 
@@ -88,4 +97,7 @@ void Database::updateSequence(string key){
     }
 
 
+}
+int Database::get_previous_choices(){
+    return *previousChoice;
 }

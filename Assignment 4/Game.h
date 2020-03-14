@@ -13,6 +13,7 @@ private:
     int round;
     Human human;
     Bot *bot;
+    bool check = true;
 public:
     void play();
     int result(int humanChoice, int botChoice);

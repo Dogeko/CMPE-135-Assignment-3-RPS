@@ -9,7 +9,7 @@ void SmartChoice::pick(int playerChoice)
     int occurance_paper;
     int occurance_scissor;
     int occurance_rock;
-    int smart_prediction;
+    int smart_prediction = -1;
     if(records.recordChoice(playerChoice)){
         //if there is a full sequence
 
@@ -93,7 +93,7 @@ void SmartChoice::pick(int playerChoice)
         }
     }
 
-       choice = smart_prediction;
+        choice = smart_prediction;
         if (choice == 0)
         {
             cout << "Your opponent picked Paper!" << endl;

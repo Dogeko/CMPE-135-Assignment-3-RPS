@@ -33,7 +33,7 @@ void SmartChoice::pick(int playerChoice)
 
         //insert predictive code here
         //printing psuedo ml choice
-        cout<<"using smart ml algo"<<endl;
+//        cout<<"using smart ml algo"<<endl;
 //        choice = rand() % 3;
         *smart_choice = records.get_previous_choices();
         for(int i = 0; i<4;i++){
@@ -69,7 +69,7 @@ void SmartChoice::pick(int playerChoice)
                 smart_prediction = 0;
             }
             else{
-                smart_prediction = 0;// robot picks paper
+                smart_prediction = random()%3;// robot picks paper
             }
         }
     else if(occurance_scissor > occurance_paper){
@@ -79,7 +79,7 @@ void SmartChoice::pick(int playerChoice)
             smart_prediction = 0; // robot picks paper
         }
         else{
-            smart_prediction = 2;
+            smart_prediction = random()%3;
         }
     }
     else if(occurance_rock > occurance_paper){
@@ -89,7 +89,7 @@ void SmartChoice::pick(int playerChoice)
             smart_prediction = 2; // robot picks paper
         }
         else{
-            smart_prediction = 2;
+            smart_prediction = random()%3;
         }
     }else{
         smart_prediction = random()%3;

@@ -30,13 +30,11 @@ bool Database::recordChoice(int choice)
                     for(int j = 0; j < 4; j++){
                         choice_record[j] = previousChoice[j];
                     }
-                    cout<<"Record_choice: sequence updated"<<endl;
                 }
                 else{
                     previousChoice[i] = choice;
                     choice_record[i] = choice;
                     check = true;
-                    cout<<"Record_choice: check"<<endl;
                 }
             fullSequence = true;
         }
@@ -79,9 +77,6 @@ int Database::searchDataMap(string key){
 void Database::addSequence(string key, int value){
 
     dataMap[key] = value;
-    for(auto& i: dataMap){
-        cout<<"Added Sequence: " << i.first <<" ocurrance:"<< i.second<<endl;
-    }
 
 }
 
@@ -95,8 +90,6 @@ void Database::updateSequence(string key){
     for(auto& i: dataMap){
         cout<<"Updated Sequence:" << i.first <<" ocurrance:"<< i.second<<endl;
     }
-
-
 }
 int Database::get_previous_choices(){
     return *previousChoice;

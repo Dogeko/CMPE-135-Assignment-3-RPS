@@ -35,24 +35,24 @@ void SmartChoice::pick(int playerChoice)
         //printing psuedo ml choice
         cout<<"using smart ml algo"<<endl;
 //        choice = rand() % 3;
-        smart_choice[5] = records.get_previous_choices();
+        *smart_choice = records.get_previous_choices();
         for(int i = 0; i<4;i++){
             temp[i] = smart_choice[i];
         }
         // paper 0
-        temp[5] = 0;
+        temp[4] = 0;
         for (int i = 0; i < 5; i++)
         {
             search_paper += to_string(temp[i]);
         }
         // scissors 1
-        temp[5] = 1;
+        temp[4] = 1;
         for (int i = 0; i < 5; i++)
         {
             search_scissor += to_string(temp[i]);
         }
         // rock 2
-        temp[5] = 2;
+        temp[4] = 2;
         for (int i = 0; i < 5; i++)
         {
             search_rock += to_string(temp[i]);
@@ -60,20 +60,38 @@ void SmartChoice::pick(int playerChoice)
         occurance_paper = records.searchDataMap(search_paper);
         occurance_scissor = records.searchDataMap(search_scissor);
         occurance_rock = records.searchDataMap(search_rock);
+        //
+
         if(occurance_paper > occurance_scissor){
-            if(occurance_paper >= occurance_rock){
+            if(occurance_paper > occurance_rock){
                 smart_prediction = 1; // robot picks scissors
-            }else{
+            } else if (occurance_paper > occurance_rock){
+                smart_prediction = 0;
+            }
+            else{
                 smart_prediction = 0;// robot picks paper
             }
         }
-        else if(occurance_scissor >= occurance_paper){
-            if(occurance_scissor >= occurance_rock){
-                smart_prediction = 2;// robot picks rock
-            }else{
-                smart_prediction = 0; // robot picks paper
-            }
+    else if(occurance_scissor > occurance_paper){
+        if(occurance_scissor > occurance_rock){
+            smart_prediction = 2;// robot picks rock
+        }else if(occurance_scissor < occurance_rock){
+            smart_prediction = 0; // robot picks paper
         }
+        else{
+            smart_prediction = 2;
+        }
+    }
+    else if(occurance_rock > occurance_paper){
+        if(occurance_rock > occurance_scissor){
+            smart_prediction = 0;// robot picks rock
+        }else if(occurance_rock < occurance_scissor){
+            smart_prediction = 2; // robot picks paper
+        }
+        else{
+            smart_prediction = 2;
+        }
+    }
 
        choice = smart_prediction;
         if (choice == 0)

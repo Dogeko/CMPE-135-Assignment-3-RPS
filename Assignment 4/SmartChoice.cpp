@@ -9,7 +9,7 @@ void SmartChoice::pick(int playerChoice)
     int occurance_paper;
     int occurance_scissor;
     int occurance_rock;
-    int smart_prediction;
+    int smart_prediction = -1;
     if(records.recordChoice(playerChoice)){
         //if there is a full sequence
 
@@ -91,6 +91,8 @@ void SmartChoice::pick(int playerChoice)
         else{
             smart_prediction = 2;
         }
+    }else{
+        smart_prediction = random()%3;
     }
 
        choice = smart_prediction;

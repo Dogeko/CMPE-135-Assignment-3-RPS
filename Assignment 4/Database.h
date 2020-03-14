@@ -13,16 +13,17 @@ class Database
 private:
     int previousChoice[5] = { 3, 3, 3, 3, 3 };
     int choice_record[5] = {3};
+    string choices;
     bool check = false;
-    unordered_map<int, int>dataMap;
+    unordered_map<string , int>dataMap;
     int recordCount = 0;
 public:
     bool recordChoice(int choice);
-    int sendSequence();
-    bool checkDataMap(int key);
-    void addSequence(int key, int value);
-    void removeSequence(int key);
-    void updateSequence(int key);
+    string sendSequence();
+    bool checkDataMap(string key);
+    void addSequence(string key, int value);
+    void removeSequence(string key);
+    void updateSequence(string key);
 
 };
 

@@ -45,7 +45,7 @@ bool Database::recordChoice(int choice)
 }
 
 
-int Database::sendSequence()
+string Database::sendSequence()
 {
     string SequenceString;
     for (int i = 0; i < 5; i++)
@@ -54,11 +54,11 @@ int Database::sendSequence()
         cout<<previousChoice[i];
     }
     cout<<"\n";
-    int Sequence = stoi(SequenceString);
-    return Sequence;
+//    S
+    return SequenceString;
 }
 
-bool Database::checkDataMap(int key){
+bool Database::checkDataMap(string key){
     bool keyFound = true;
 
     if(dataMap.find(key) == dataMap.end()) keyFound = false;
@@ -67,7 +67,7 @@ bool Database::checkDataMap(int key){
 
 }
 
-void Database::addSequence(int key, int value){
+void Database::addSequence(string key, int value){
 
     dataMap[key] = value;
     for(auto& i: dataMap){
@@ -76,11 +76,11 @@ void Database::addSequence(int key, int value){
 
 }
 
-void Database::removeSequence(int key){
+void Database::removeSequence(string key){
 
     dataMap.erase(key);
 }
-void Database::updateSequence(int key){
+void Database::updateSequence(string key){
 
     dataMap.at(key) += 1;
     for(auto& i: dataMap){

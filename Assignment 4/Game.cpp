@@ -2,15 +2,15 @@
 
 void Game::play()
 {
-        char play_check;
-        char algo_type;
-        cout << "Choose BOT algorithm:" << endl;
-        cout << "Type 'R' for random OR 'S' for smart" << endl;
-        cin >> algo_type;
-        round = 20;
+    char algo_type;
+    char check = 'a';
+    cout << "Choose BOT algorithm:" << endl;
+    cout << "Type 'R' for random OR 'S' for smart" << endl;
+    cin >> algo_type;
+    round = 20;
 
-        bot = BotFactory::pickAlgo(algo_type);
-    while(check) {
+    bot = BotFactory::pickAlgo(algo_type);
+    while (check != 'n') {
         for (int i = 0; i < round; i++) {
             cout << "Round " << i + 1 << endl;
             human.playerPick();
@@ -18,13 +18,14 @@ void Game::play()
             printResult(result(human.getChoice(), bot->getChoice()));
         }
         cout << "Game Over!" << endl;
-        cout <<"another game? y/n"<< endl;
-        cin >> play_check;
-        if(play_check == 'y'){
-            check = true;
-        }
-        else {
-            check = false;
+        cout << "Would you like to play another game? (y/n): ";
+        while (check != 'n')
+        {
+            cin >> check;
+            if (check == 'y')
+            {
+                break;
+            }
         }
     }
 }

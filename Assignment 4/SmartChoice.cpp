@@ -95,7 +95,7 @@ void SmartChoice::pick(int playerChoice)
         smart_prediction = random()%3;
     }
 
-       choice = smart_prediction;
+        choice = smart_prediction;
         if (choice == 0)
         {
             cout << "Your opponent picked Paper!" << endl;

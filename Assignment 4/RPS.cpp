@@ -11,9 +11,6 @@ using namespace std;
 int main()
 {
 	Game game;
-	char endgame;
 	game.play();
-	cout << "Enter anything to close game" << endl;
-	cin >> endgame;
 	return 0;
 }

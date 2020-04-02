@@ -78,4 +78,5 @@ void DemoFrame::on_new_game(wxCommandEvent& WXUNUSED(event))
 {
     //Close(true);  // true is to force the frame to close
 	wxMessageBox(wxString::Format("A new game has started"));
+	//consider functionality if user clicks on "new game" ask how many rounds
 }

@@ -32,6 +32,8 @@ public:
      */
     void on_quit(wxCommandEvent& event);
 
+    void on_new_game(wxCommandEvent& event);
+
 private:
     // The event table that maps events to their handlers.
     wxDECLARE_EVENT_TABLE();
@@ -58,7 +60,8 @@ private:
 enum
 {
     RPS_About = wxID_ABOUT,
-    RPS_Quit  = wxID_EXIT
+    RPS_Quit  = wxID_EXIT,
+	RPS_NewGame = wxID_HIGHEST + 1
 };
 
 #endif /* DEMOFRAME_H_ */

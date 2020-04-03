@@ -2,48 +2,49 @@
 
 void ButtonPanel::init()
 {
-    wxSizer *main_panel_sizer = new wxBoxSizer(wxVERTICAL);
+    wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 
-    //Round panel
     wxPanel *round_panel = new wxPanel(this, wxID_ANY);
-    wxSizer *round_sizer = new wxGridSizer(2, 0, 5);
+    wxSizer *round_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxStaticText *round_text = new wxStaticText(round_panel, wxID_ANY, "Round:");
+    round_text->SetFont(round_text->GetFont().Larger());
 
-    wxStaticText *round_text = new wxStaticText(round_panel, wxID_ANY, "ROUND:");
-    //code to retrieve round
-    round_sizer->Add(round_text, 0, 0, 0);
-    round_sizer->AddSpacer(5);
+    round_sizer->Add(round_text, 0, wxALIGN_RIGHT, 0);
 
-    round_panel ->SetSizer(round_sizer);
+    round_sizer->AddSpacer(20);
+    round_count_text = new wxStaticText(round_panel, wxID_ANY, "");
+    round_count_text->SetFont(round_count_text->GetFont().Larger());
+    round_sizer->Add(round_count_text, 0, 0, 0);
+    round_sizer->AddSpacer(20);
 
-    //Human text panel
+    round_panel->SetSizer(round_sizer);
+
     wxPanel *human_panel = new wxPanel(this, wxID_ANY);
-    wxSizer *human_sizer = new wxGridSizer(2, 0, 5);
+    wxSizer *human_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText *human_text = new wxStaticText(human_panel, wxID_ANY,
-                                                     "HUMAN");
-    human_sizer->Add(human_text, 0, 0, 0);
+                                                "Human");
+    human_text->SetFont(human_text->GetFont().Larger());
 
-    human_panel ->SetSizer(human_sizer);
-    // Button panel
+    human_sizer->Add(human_text, 0, 0, 0);
+    human_sizer->AddSpacer(5);
+    human_panel->SetSizer(human_sizer);
 
     wxPanel *button_panel = new wxPanel(this, wxID_ANY);
     wxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
 
-
     wxStaticText *choose_text = new wxStaticText(button_panel, wxID_ANY,
                                                  "Choose:");
-    wxButton *rock_button     = new wxButton(button_panel, wxID_ANY,
-                                             choice_to_wxString(ROCK));
-    wxButton *paper_button    = new wxButton(button_panel, wxID_ANY,
-                                             choice_to_wxString(PAPER));
+    wxButton *rock_button = new wxButton(button_panel, wxID_ANY,
+                                         choice_to_wxString(ROCK));
+    wxButton *paper_button = new wxButton(button_panel, wxID_ANY,
+                                          choice_to_wxString(PAPER));
     wxButton *scissors_button = new wxButton(button_panel, wxID_ANY,
                                              choice_to_wxString(SCISSORS));
 
-    rock_button->Bind    (wxEVT_BUTTON, &ButtonPanel::on_rock, this);
-    paper_button->Bind   (wxEVT_BUTTON, &ButtonPanel::on_paper, this);
+    rock_button->Bind(wxEVT_BUTTON, &ButtonPanel::on_rock, this);
+    paper_button->Bind(wxEVT_BUTTON, &ButtonPanel::on_paper, this);
     scissors_button->Bind(wxEVT_BUTTON, &ButtonPanel::on_scissors, this);
 
-    button_sizer->Add(human_text, 0, 0, 0);
-    button_sizer->AddSpacer(5);
     button_sizer->Add(choose_text, 0, 0, 0);
     button_sizer->AddSpacer(5);
     button_sizer->Add(rock_button, 0, 0, 0);
@@ -53,105 +54,176 @@ void ButtonPanel::init()
     button_sizer->Add(scissors_button, 0, 0, 0);
     button_panel->SetSizer(button_sizer);
 
-    // Choice panel
+    wxPanel *chosen_panel = new wxPanel(this, wxID_ANY);
+    wxSizer *chosen_sizer = new wxGridSizer(2, 0, 5);
 
-    wxPanel *choice_panel = new wxPanel(this, wxID_ANY);
-    wxSizer *choice_sizer = new wxGridSizer(2, 0, 5);
+    wxStaticText *chosen_text = new wxStaticText(chosen_panel, wxID_ANY,
+                                                 "Human chooses:");
+    button_chosen_text = new wxStaticText(chosen_panel, wxID_ANY, "");
+    button_chosen_text->SetFont(button_chosen_text->GetFont().Larger());
+    chosen_sizer->Add(chosen_text, 0, wxALIGN_RIGHT, 0);
+    chosen_sizer->Add(button_chosen_text, 0, 0, 0);
+    chosen_panel->SetSizer(chosen_sizer);
 
-    wxStaticText *chosen_object_label =
-            new wxStaticText(choice_panel, wxID_ANY, "Human chose:");
-    chosen_button_name = new wxStaticText(choice_panel, wxID_ANY, "");
-    chosen_button_name->SetFont(chosen_button_name->GetFont().Larger());
+    wxPanel *computer_panel = new wxPanel(this, wxID_ANY);
+    wxSizer *computer_sizer = new wxGridSizer(2, 0, 5);
 
-    choice_sizer->Add(chosen_object_label, 0, wxALIGN_RIGHT, 0);
-    choice_sizer->Add(chosen_button_name, 0, 0, 0);
-    choice_panel->SetSizer(choice_sizer);
+    wxStaticText *computer_text = new wxStaticText(computer_panel, wxID_ANY, "Computer chooses:");
+    computer_chosen_text = new wxStaticText(computer_panel, wxID_ANY, "");
+    computer_chosen_text->SetFont(computer_chosen_text->GetFont().Larger());
+    computer_sizer->Add(computer_text, 0, wxALIGN_RIGHT, 0);
+    computer_sizer->Add(computer_chosen_text, 0, 0, 0);
+    computer_panel->SetSizer(computer_sizer);
 
-    //Bot Panel
-    wxPanel *bot_panel = new wxPanel(this, wxID_ANY);
-    wxSizer *bot_sizer = new wxGridSizer(2, 0, 5);
+    wxPanel *human_choice_panel = new wxPanel(this, wxID_ANY);
+    wxSizer *human_choice_sizer = new wxGridSizer(wxHORIZONTAL);
+    wxStaticText *human_choice_text = new wxStaticText(human_choice_panel, wxID_ANY,
+                                                       "Predicted human choice: ");
+    human_prediction_text = new wxStaticText(human_choice_panel, wxID_ANY, "");
+    human_choice_sizer->Add(human_choice_text, 0, wxALIGN_RIGHT, 0);
+    human_choice_sizer->AddSpacer(5);
+    human_choice_sizer->Add(human_prediction_text, 0, 0, 0);
+    human_choice_panel->SetSizer(human_choice_sizer);
 
-    wxStaticText *bot_text = new wxStaticText(bot_panel, wxID_ANY,
-                                                             "BOT");
-    wxStaticText *bot_predict_text = new wxStaticText(bot_panel, wxID_ANY,
-                                                         "Bot predicts:");
-    wxStaticText *bot_choice_text = new wxStaticText(bot_panel, wxID_ANY, "Bot chose:");
-
-    bot_sizer->Add(bot_text, 0, 0, 0);
-    bot_sizer->AddSpacer(5);
-    bot_sizer->Add(bot_predict_text, 0, 0, 0);
-    bot_sizer->AddSpacer(5);
-    bot_sizer->Add(bot_choice_text, 0, 0, 0);
-    bot_sizer->AddSpacer(5);
-    bot_panel ->SetSizer(bot_sizer);
-
-    //Winner panel
     wxPanel *winner_panel = new wxPanel(this, wxID_ANY);
-    wxSizer *winner_sizer = new wxGridSizer(2, 0, 5);
+    wxSizer *winner_sizer = new wxGridSizer(wxHORIZONTAL);
+    wxStaticText *winner_text = new wxStaticText(winner_panel, wxID_ANY, "The winner: ");
+    winner_result_text = new wxStaticText(winner_panel, wxID_ANY, "");
+    winner_text->SetFont(winner_text->GetFont().Larger());
+    winner_result_text->SetFont(winner_result_text->GetFont().Larger());
 
-       wxStaticText *winner_text = new wxStaticText(winner_panel, wxID_ANY, "WINNER:");
-       //code to retrieve round
-       winner_sizer->Add(winner_text, 0, 0, 0);
-       winner_sizer->AddSpacer(5);
+    winner_sizer->Add(winner_text, 0, wxALIGN_RIGHT, 0);
+    winner_sizer->Add(winner_result_text, 0, 0, 0);
+    winner_panel->SetSizer(winner_sizer);
 
-       winner_panel ->SetSizer(winner_sizer);
+    wxPanel *statistic_panel = new wxPanel(this, wxID_ANY);
+    wxSizer *statistic_sizer = new wxGridSizer(wxHORIZONTAL);
+    wxStaticText *statistic_text = new wxStaticText(statistic_panel, wxID_ANY,
+                                                    "Statistics");
+    wxStaticText *human_wins_text = new wxStaticText(statistic_panel, wxID_ANY,
+                                                     "Human wins: ");
+    human_win_text = new wxStaticText(statistic_panel, wxID_ANY, "");
 
-       //Bot Panel
-       wxPanel *stat_panel = new wxPanel(this, wxID_ANY);
-       wxSizer *stat_sizer = new wxGridSizer(2, 0, 5);
+    wxStaticText *computer_wins_text = new wxStaticText(statistic_panel, wxID_ANY, "Computer wins: ");
+    computer_win_text = new wxStaticText(statistic_panel, wxID_ANY, "");
+    wxStaticText *tie_text = new wxStaticText(statistic_panel, wxID_ANY, "Ties: ");
+    tie_count_text = new wxStaticText(statistic_panel, wxID_ANY, "");
 
-       wxStaticText *stat_text = new wxStaticText(stat_panel, wxID_ANY,
-                                                                    "STATISTICS");
-       wxStaticText *stat_human_text = new wxStaticText(stat_panel, wxID_ANY,
-                                                                "Human wins:");
-       wxStaticText *stat_bot_text = new wxStaticText(stat_panel, wxID_ANY, "Bot wins:");
+    statistic_sizer->Add(statistic_text, 0, wxALIGN_CENTER, 0);
+    statistic_sizer->AddSpacer(20);
+    statistic_sizer->Add(human_wins_text, 0, wxALIGN_CENTER, 0);
+    statistic_sizer->Add(human_win_text, 0, 0, 0);
+    statistic_sizer->Add(computer_wins_text, 0, wxALIGN_CENTER, 0);
+    statistic_sizer->Add(computer_win_text, 0, 0, 0);
+    statistic_sizer->Add(tie_text, 0, wxALIGN_CENTER, 0);
+    statistic_sizer->Add(tie_count_text, 0, 0, 0);
+    statistic_panel->SetSizer(statistic_sizer);
 
-       wxStaticText *stat_ties_text = new wxStaticText(stat_panel, wxID_ANY, "Ties:");
+    sizer->Add(round_panel, 0, wxALIGN_CENTER, 0);
+    sizer->AddSpacer(20);
+    sizer->Add(human_panel, 0, wxALIGN_CENTER, 0);
+    sizer->AddSpacer(20);
+    sizer->Add(button_panel, 0, wxALIGN_CENTER, 0);
+    sizer->AddSpacer(20);
+    sizer->Add(chosen_panel, 0, wxALIGN_CENTER, 0);
+    sizer->AddSpacer(20);
+    sizer->Add(human_choice_panel, 0, wxALIGN_CENTER, 0);
+    sizer->AddSpacer(20);
+    sizer->Add(computer_panel, 0, wxALIGN_CENTER, 0);
+    sizer->AddSpacer(20);
+    sizer->Add(winner_panel, 0, wxALIGN_CENTER, 0);
+    sizer->AddSpacer(20);
+    sizer->Add(statistic_panel, 0, wxALIGN_CENTER, 0);
+    sizer->AddSpacer(20);
 
-       stat_sizer->Add(stat_text, 0, 0, 0);
-       stat_sizer->AddSpacer(5);
-       stat_sizer->Add(stat_human_text, 0, 0, 0);
-       stat_sizer->AddSpacer(5);
-       stat_sizer->Add(stat_bot_text, 0, 0, 0);
-       stat_sizer->AddSpacer(5);
-       stat_sizer->Add(stat_ties_text, 0, 0, 0);
-       stat_sizer->AddSpacer(5);
-       stat_panel ->SetSizer(stat_sizer);
-    // Main panel
-    main_panel_sizer->Add(round_panel, 0, wxALIGN_CENTER, 0);
-    main_panel_sizer->AddSpacer(20);
-    main_panel_sizer->Add(human_panel, 0, wxALIGN_CENTER, 0);
-    main_panel_sizer->AddSpacer(5);
-    main_panel_sizer->Add(button_panel, 0, wxALIGN_CENTER, 0);
-    main_panel_sizer->AddSpacer(20);
-    main_panel_sizer->Add(choice_panel, 0, wxALIGN_CENTER, 0);
-    main_panel_sizer->AddSpacer(20);
-    main_panel_sizer->Add(bot_panel, 0, wxALIGN_CENTER, 0);
-    main_panel_sizer->AddSpacer(20);
-    main_panel_sizer->Add(winner_panel, 0, wxALIGN_CENTER, 0);
-    main_panel_sizer->AddSpacer(20);
-    main_panel_sizer->Add(stat_panel, 0, wxALIGN_CENTER, 0);
-    main_panel_sizer->AddSpacer(20);
-
-    SetSizer(main_panel_sizer);
+    SetSizer(sizer);
 }
 
-void ButtonPanel::on_rock(wxCommandEvent& event)
+void ButtonPanel::on_rock(wxCommandEvent &event)
 {
-    update_button_choice_text(ROCK);
+    if (roshambo->getRound() < 20)
+    {
+        update_button_choice_text(ROCK);
+        update_winner_result_text(roshambo->playMLRound(ROCK));
+        update_human_prediction_text(roshambo->getPlayerPrediction());
+        update_computer_choice_text(roshambo->getComputerChoice());
+        update_round();
+        update_scoreboard();
+    }
+    else
+    {
+        cout << "End of game!\n"
+             << endl;
+        new_game();
+    }
 }
 
-void ButtonPanel::on_paper(wxCommandEvent& event)
+void ButtonPanel::on_paper(wxCommandEvent &event)
 {
-    update_button_choice_text(PAPER);
+    if (roshambo->getRound() < 20)
+    {
+        update_button_choice_text(PAPER);
+        update_winner_result_text(roshambo->playMLRound(PAPER));
+        update_computer_choice_text(roshambo->getComputerChoice());
+        update_human_prediction_text(roshambo->getPlayerPrediction());
+        update_round();
+        update_scoreboard();
+    }
+    else
+    {
+        cout << "End of game!\n"
+             << endl;
+        new_game();
+    }
 }
 
-void ButtonPanel::on_scissors(wxCommandEvent& event)
+void ButtonPanel::on_scissors(wxCommandEvent &event)
 {
-    update_button_choice_text(SCISSORS);
+    if (roshambo->getRound() < 20)
+    {
+        update_button_choice_text(SCISSORS);
+        update_winner_result_text(roshambo->playMLRound(SCISSORS));
+        update_computer_choice_text(roshambo->getComputerChoice());
+        update_human_prediction_text(roshambo->getPlayerPrediction());
+        update_round();
+        update_scoreboard();
+    }
+    else
+    {
+        cout << "End of game!\n"
+             << endl;
+        new_game();
+    }
 }
 
 void ButtonPanel::update_button_choice_text(const Choice choice)
 {
-    chosen_button_name->SetLabelText(choice_to_wxString(choice));
+    button_chosen_text->SetLabelText(choice_to_wxString(choice));
+}
+
+void ButtonPanel::update_computer_choice_text(const Choice choice)
+{
+    computer_chosen_text->SetLabelText(choice_to_wxString(choice));
+}
+
+void ButtonPanel::update_winner_result_text(const std::string winner)
+{
+    winner_result_text->SetLabelText(string_to_wxString(winner));
+}
+
+void ButtonPanel::update_scoreboard()
+{
+    human_win_text->SetLabelText(int_to_wxString(roshambo->getPlayerScore(HUMAN)));
+    computer_win_text->SetLabelText(int_to_wxString(roshambo->getPlayerScore(COMPUTER)));
+    tie_count_text->SetLabelText(int_to_wxString(roshambo->getPlayerScore(TIE)));
+}
+
+void ButtonPanel::update_round()
+{
+    round_count_text->SetLabelText(int_to_wxString(roshambo->getRound()));
+}
+
+void ButtonPanel::update_human_prediction_text(const Choice choice)
+{
+    human_prediction_text->SetLabelText(choice_to_wxString(choice));
 }

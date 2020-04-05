@@ -161,8 +161,9 @@ void ButtonPanel::on_rock(wxCommandEvent &event)
     {
     	update_button_choice_text(ROCK);
 
-    	//update_computer_prediction_choice_text(RPS->human.getChoice());
+
     	update_computer_choice_text(RPS->human.getChoice());
+    	update_computer_prediction_choice_text(RPS->human.getChoice());
 
         update_winner_result_text();
 
@@ -185,9 +186,9 @@ void ButtonPanel::on_paper(wxCommandEvent &event)
     if (RPS->getRound() >= 1)
     {
        update_button_choice_text(PAPER);
-       //update_computer_prediction_choice_text(RPS->human.getChoice());
-       update_computer_choice_text(RPS->human.getChoice());
 
+       update_computer_choice_text(RPS->human.getChoice());
+       update_computer_prediction_choice_text(RPS->human.getChoice());
        update_winner_result_text();
 
        update_statistics();
@@ -211,9 +212,9 @@ void ButtonPanel::on_scissors(wxCommandEvent &event)
     {
         update_button_choice_text(SCISSORS);
 
-        //update_computer_prediction_choice_text(RPS->human.getChoice());
-        update_computer_choice_text(RPS->human.getChoice());
 
+        update_computer_choice_text(RPS->human.getChoice());
+        update_computer_prediction_choice_text(RPS->human.getChoice());
         update_winner_result_text();
 
         update_statistics();
@@ -253,7 +254,7 @@ void ButtonPanel::update_computer_choice_text(int humanChoice)
 
 	RPS->bot->pick(humanChoice);
 
-	update_computer_prediction_choice_text(RPS->human.getChoice());
+//	update_computer_prediction_choice_text(RPS->human.getChoice());
 	botChoice = RPS->bot->getChoice();
 	cout<< "botChoice : "<<botChoice<<endl;
 	if(botChoice == 0){
@@ -272,9 +273,8 @@ void ButtonPanel::update_computer_choice_text(int humanChoice)
 
 void ButtonPanel::update_computer_prediction_choice_text(int humanChoice)
 {
-	int prediction;
+	int prediction = -1;
 	wxString predictionString;
-	RPS->bot->pick(humanChoice);
 	prediction = RPS->bot->getChoice();
 	if(prediction == 0){// 0 paper bot choose and prediction is rock
 		cout << "the prediction is: Rock, Choice is : Paper"<< endl;

@@ -21,27 +21,14 @@ public:
     void play();
     int result(int humanChoice, int botChoice);
     void printResult(int result);
-    void playRound();
-    int getRound(){
-    	return round;
-    }
-
-    void setRound(int rounds){
-    	round = rounds;
-    }
-
-    int getHumanWins(){ return humanWins; }
-
-    void addHumanWin(){ humanWins = humanWins + 1; }
-
-    int getBotWins(){ return botWins; }
-
-    void addBotWin(){ botWins = botWins + 1; }
-
-    int getDraws(){ return Draws; }
-
-    void addDraw(){ Draws = Draws + 1; }
-
+    int getRound();
+    void setRound(int rounds);
+    int getHumanWins();
+    void addHumanWin();
+    int getBotWins();
+    void addBotWin();
+    int getDraws();
+    void addDraw();
 };
 
 #endif

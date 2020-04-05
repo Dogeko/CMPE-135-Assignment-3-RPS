@@ -2,6 +2,7 @@
 
 void Game::play()
 {
+
     round = 20;
 
     bot = BotFactory::pickAlgo('S');
@@ -64,4 +65,44 @@ void Game::printResult(int result)
     {
         cout << "You lose!" << endl;
     }
+}
+
+void Game::getRound()
+{
+    return round;
+}
+
+void Game::setRound(int rounds)
+{
+    round = rounds;
+}
+
+int Game::getHumanWins()
+{
+    return humanWins;
+}
+
+void Game::addHumanWin()
+{
+    return humanWins = humanWins + 1;
+}
+
+int Game::getBotWins()
+{
+    return botWins;
+}
+
+void Game::addBotWin()
+{
+    return botWins = botWins + 1;
+}
+
+int Game::getDraws()
+{
+    return Draws;
+}
+
+void Game::addDraw()
+{
+    Draws = Draws + 1;
 }

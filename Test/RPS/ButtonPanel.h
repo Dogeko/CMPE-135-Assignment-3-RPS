@@ -23,9 +23,10 @@ public:
 
     void new_game()
     {
+
         delete RPS;
         RPS = new Game;
-        update_new_game_screen();
+
     }
 
     /**
@@ -52,6 +53,9 @@ public:
         cout << "deleting rps...\n";
     }
 
+    void setRPSRounds(int roundCount);
+    void update_new_game_screen();
+
 private:
     Game *RPS;
     wxStaticText *round_count_text;
@@ -62,6 +66,7 @@ private:
     wxStaticText *computer_win_text;
     wxStaticText *draw_count_text;
     wxStaticText *human_prediction_text;
+    bool firstGame = true;
 
     /**
      * Initialize the panel contents.
@@ -79,7 +84,9 @@ private:
     void update_statistics();
     void update_round();
     void update_human_prediction_text(const Choice choice);
-    void update_new_game_screen();
+
+
+
 };
 
 #endif /* BUTTONPANEL_H_ */

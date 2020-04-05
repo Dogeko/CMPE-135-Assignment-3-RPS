@@ -165,9 +165,11 @@ void ButtonPanel::on_rock(wxCommandEvent &event)
     }
     else
     {
-        cout << "End of game!\n"
-             << endl;
-        new_game();
+    	 cout << "End of game!\n" << endl;
+    	        wxMessageBox(wxString::Format(
+    	        "Game Over\n"
+    	        "Click the 'New Game' menu item \n"
+    	        "and click 'Start' to start a new game.\n" ));
     }
 }
 
@@ -187,9 +189,11 @@ void ButtonPanel::on_paper(wxCommandEvent &event)
     }
     else
     {
-        cout << "End of game!\n"
-             << endl;
-        new_game();
+    	 cout << "End of game!\n" << endl;
+    	        wxMessageBox(wxString::Format(
+    	        "Game Over\n"
+    	        "Click the 'New Game' menu item \n"
+    	        "and click 'Start' to start a new game.\n" ));
     }
 }
 
@@ -209,9 +213,11 @@ void ButtonPanel::on_scissors(wxCommandEvent &event)
     }
     else
     {
-        cout << "End of game!\n"
-             << endl;
-        new_game();
+    	 cout << "End of game!\n" << endl;
+    	        wxMessageBox(wxString::Format(
+    	        "Game Over\n"
+    	        "Click the 'New Game' menu item \n"
+    	        "and click 'Start' to start a new game.\n" ));
     }
 }
 
@@ -296,7 +302,7 @@ void ButtonPanel::update_human_prediction_text(const Choice choice)
 }
 void ButtonPanel::update_new_game_screen(){
 
-	round_count_text->SetLabelText("20");
+	round_count_text->SetLabelText(wxString::Format(wxT("%i"),RPS->getRound()));
 
 
 	button_chosen_text->SetLabelText("");
@@ -308,5 +314,11 @@ void ButtonPanel::update_new_game_screen(){
 	human_win_text->SetLabelText("0");
 	computer_win_text->SetLabelText("0");
 	draw_count_text->SetLabelText("0");
+
+}
+
+void ButtonPanel::setRPSRounds(int roundCount){
+
+	RPS->setRound(roundCount);
 
 }

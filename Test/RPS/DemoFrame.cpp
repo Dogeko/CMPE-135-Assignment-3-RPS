@@ -47,9 +47,9 @@ void DemoFrame::init_sizer()
 void DemoFrame::init_menu_bar()
 {
     wxMenu *fileMenu = new wxMenu;
-    fileMenu->Append(RPS_Quit,  "E&xit\tAlt-X", "Quit program");
-    fileMenu->Append(RPS_About, "&About\tF1",   "Show about dialog");
     fileMenu->Append(RPS_NewGame, "&Start New Game",   "Start a new game");
+    fileMenu->Append(RPS_About, "&About\tF1",   "Show about dialog");
+    fileMenu->Append(RPS_Quit,  "E&xit\tAlt-X", "Quit program");
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, "&File");
     //menuBar->Append(helpMenu, "&Help");

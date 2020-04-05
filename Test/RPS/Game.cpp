@@ -10,7 +10,7 @@ void Game::play()
         for (int i = 0; i < round; i++) {
             cout << "Round " << i + 1 << endl;
             human.playerPick();
-            bot->pick(human.getChoice(), prediction);
+            bot->pick(human.getChoice());
             printResult(result(human.getChoice(), bot->getChoice()));
         }
         check = 'n';

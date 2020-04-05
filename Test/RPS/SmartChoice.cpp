@@ -1,6 +1,6 @@
 #include "SmartChoice.h"
 
-void SmartChoice::pick(int playerChoice, int prediction)
+void SmartChoice::pick(int playerChoice)
 {
     int temp[5] = {};
     string search_paper;
@@ -85,9 +85,9 @@ void SmartChoice::pick(int playerChoice, int prediction)
     }
     else if(occurance_rock > occurance_paper){
         if(occurance_rock > occurance_scissor){
-            smart_prediction = 0;// robot picks rock
+            smart_prediction = 0;// robot picks paper
         }else if(occurance_rock < occurance_scissor){
-            smart_prediction = 2; // robot picks paper
+            smart_prediction = 2; // robot picks rock
         }
         else{
             smart_prediction = random()%3;
@@ -97,7 +97,6 @@ void SmartChoice::pick(int playerChoice, int prediction)
     }
 
         choice = smart_prediction;
-        prediction = smart_prediction;
         if (choice == 0)
         {
             cout << "Your opponent picked Paper!" << endl;

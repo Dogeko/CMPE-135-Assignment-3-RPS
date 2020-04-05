@@ -161,8 +161,9 @@ void ButtonPanel::on_rock(wxCommandEvent &event)
     {
     	update_button_choice_text(ROCK);
 
+    	//update_computer_prediction_choice_text(RPS->human.getChoice());
     	update_computer_choice_text(RPS->human.getChoice());
-    	update_computer_prediction_choice_text(RPS->human.getChoice());
+
         update_winner_result_text();
 
         update_statistics();
@@ -184,9 +185,9 @@ void ButtonPanel::on_paper(wxCommandEvent &event)
     if (RPS->getRound() >= 1)
     {
        update_button_choice_text(PAPER);
-
+       //update_computer_prediction_choice_text(RPS->human.getChoice());
        update_computer_choice_text(RPS->human.getChoice());
-       update_computer_prediction_choice_text(RPS->human.getChoice());
+
        update_winner_result_text();
 
        update_statistics();
@@ -210,9 +211,9 @@ void ButtonPanel::on_scissors(wxCommandEvent &event)
     {
         update_button_choice_text(SCISSORS);
 
-
+        //update_computer_prediction_choice_text(RPS->human.getChoice());
         update_computer_choice_text(RPS->human.getChoice());
-        update_computer_prediction_choice_text(RPS->human.getChoice());
+
         update_winner_result_text();
 
         update_statistics();
@@ -247,21 +248,24 @@ void ButtonPanel::update_button_choice_text(const Choice choice)
 void ButtonPanel::update_computer_choice_text(int humanChoice)
 {
 	int botChoice;
-	int prediction;
+
 	wxString botString;
-	RPS->bot->pick(humanChoice, prediction);
 
+	RPS->bot->pick(humanChoice);
 
+	update_computer_prediction_choice_text(RPS->human.getChoice());
 	botChoice = RPS->bot->getChoice();
+	cout<< "botChoice : "<<botChoice<<endl;
 	if(botChoice == 0){
-		botString = "Paper";
+		botString = "Paper"; //paper
 	}
-	else if(botChoice == 1){
+	else if(botChoice == 1){ //rock
 		botString = "Scissors";
 	}
 	else{
-		botString = "Rock";
+		botString = "Rock"; // scissors
 	}
+
 
     bot_chosen_text->SetLabelText(botString);
 }
@@ -269,20 +273,23 @@ void ButtonPanel::update_computer_choice_text(int humanChoice)
 void ButtonPanel::update_computer_prediction_choice_text(int humanChoice)
 {
 	int prediction;
-	wxString botString;
+	wxString predictionString;
+	RPS->bot->pick(humanChoice);
+	prediction = RPS->bot->getChoice();
+	if(prediction == 0){// 0 paper bot choose and prediction is rock
+		cout << "the prediction is: Rock, Choice is : Paper"<< endl;
+		predictionString = "Rock";
+	}
+	else if(prediction == 1){//1 scissors choose and prediction is paper
+		cout << "the prediction is: Paper, Choice is : Scissors "<< endl;
+		predictionString = "Paper";
+	}
+	else{//2 rock choose and prediction is scissors
+		cout << "the prediction is: Scissors, Choice is : Rock " << endl;
+		predictionString = "Scissors";
+	}
 
-	RPS->bot->pick(humanChoice, prediction);
-	if(prediction == 0){
-		botString = "Rock";
-	}
-	else if(prediction == 1){
-		botString = "Paper";
-	}
-	else{
-		botString = "Scissors";
-	}
-
-    human_prediction_text->SetLabelText(botString);
+    human_prediction_text->SetLabelText(predictionString);
 }
 
 void ButtonPanel::update_winner_result_text()

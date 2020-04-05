@@ -152,7 +152,7 @@ void ButtonPanel::init()
 
 void ButtonPanel::on_rock(wxCommandEvent &event)
 {
-    if (RPS->getRound() > 1)
+    if (RPS->getRound() >= 1)
     {
     	update_button_choice_text(ROCK);
 
@@ -175,7 +175,7 @@ void ButtonPanel::on_rock(wxCommandEvent &event)
 
 void ButtonPanel::on_paper(wxCommandEvent &event)
 {
-    if (RPS->getRound() > 1)
+    if (RPS->getRound() >= 1)
     {
        update_button_choice_text(PAPER);
 
@@ -199,7 +199,7 @@ void ButtonPanel::on_paper(wxCommandEvent &event)
 
 void ButtonPanel::on_scissors(wxCommandEvent &event)
 {
-    if (RPS->getRound() > 1)
+    if (RPS->getRound() >= 1)
     {
         update_button_choice_text(SCISSORS);
 

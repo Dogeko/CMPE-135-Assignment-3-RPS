@@ -74,11 +74,11 @@ void ButtonPanel::init()
     wxPanel *computer_panel = new wxPanel(this, wxID_ANY);
     wxSizer *computer_sizer = new wxGridSizer(2, 0, 5);
 
-    wxStaticText *computer_text = new wxStaticText(computer_panel, wxID_ANY, "Computer chooses:");
-    computer_chosen_text = new wxStaticText(computer_panel, wxID_ANY, "");
-    computer_chosen_text->SetFont(computer_chosen_text->GetFont().Larger());
+    wxStaticText *computer_text = new wxStaticText(computer_panel, wxID_ANY, "Bot chooses:");
+    bot_chosen_text = new wxStaticText(computer_panel, wxID_ANY, "");
+    bot_chosen_text->SetFont(bot_chosen_text->GetFont().Larger());
     computer_sizer->Add(computer_text, 0, wxALIGN_RIGHT, 0);
-    computer_sizer->Add(computer_chosen_text, 0, 0, 0);
+    computer_sizer->Add(bot_chosen_text, 0, 0, 0);
     computer_panel->SetSizer(computer_sizer);
 
     //human choice panel
@@ -98,7 +98,7 @@ void ButtonPanel::init()
     //winner panel
     wxPanel *winner_panel = new wxPanel(this, wxID_ANY);
     wxSizer *winner_sizer = new wxGridSizer(2, 0, 5);
-    wxStaticText *winner_text = new wxStaticText(winner_panel, wxID_ANY, "The winner: ");
+    wxStaticText *winner_text = new wxStaticText(winner_panel, wxID_ANY, "Winner: ");
     winner_result_text = new wxStaticText(winner_panel, wxID_ANY, "");
     //winner_text->SetFont(winner_text->GetFont().Larger());
     winner_result_text->SetFont(winner_result_text->GetFont().Larger());
@@ -110,7 +110,6 @@ void ButtonPanel::init()
 
     //statistics panel
     wxPanel *statistic_panel = new wxPanel(this, wxID_ANY);
-    //wxSizer *statistic_sizer = new wxGridSizer(wxHORIZONTAL);
     wxSizer *statistic_sizer = new wxGridSizer(2, 0, 5);
 
     wxStaticText *statistic_text = new wxStaticText(statistic_panel, wxID_ANY,
@@ -121,17 +120,17 @@ void ButtonPanel::init()
                                                      "Human wins: ");
     human_win_text = new wxStaticText(statistic_panel, wxID_ANY, "");
 
-    wxStaticText *computer_wins_text = new wxStaticText(statistic_panel, wxID_ANY, "Computer wins: ");
-    computer_win_text = new wxStaticText(statistic_panel, wxID_ANY, "");
-    wxStaticText *tie_text = new wxStaticText(statistic_panel, wxID_ANY, "Ties: ");
+    wxStaticText *bot_wins_text = new wxStaticText(statistic_panel, wxID_ANY, "Bot wins: ");
+    bot_win_text = new wxStaticText(statistic_panel, wxID_ANY, "");
+    wxStaticText *tie_text = new wxStaticText(statistic_panel, wxID_ANY, "Draws: ");
     draw_count_text = new wxStaticText(statistic_panel, wxID_ANY, "");
 
     statistic_sizer->Add(statistic_text, 0, wxALIGN_CENTER, 0);
     statistic_sizer->AddSpacer(20);
     statistic_sizer->Add(human_wins_text, 0, wxALIGN_CENTER, 0);
     statistic_sizer->Add(human_win_text, 0, 0, 0);
-    statistic_sizer->Add(computer_wins_text, 0, wxALIGN_CENTER, 0);
-    statistic_sizer->Add(computer_win_text, 0, 0, 0);
+    statistic_sizer->Add(bot_wins_text, 0, wxALIGN_CENTER, 0);
+    statistic_sizer->Add(bot_win_text, 0, 0, 0);
     statistic_sizer->Add(tie_text, 0, wxALIGN_CENTER, 0);
     statistic_sizer->Add(draw_count_text, 0, 0, 0);
     statistic_panel->SetSizer(statistic_sizer);
@@ -264,7 +263,7 @@ void ButtonPanel::update_computer_choice_text(int humanChoice)
 		botString = "Rock";
 	}
 
-    computer_chosen_text->SetLabelText(botString);
+    bot_chosen_text->SetLabelText(botString);
 }
 
 void ButtonPanel::update_computer_prediction_choice_text(int humanChoice)
@@ -272,7 +271,7 @@ void ButtonPanel::update_computer_prediction_choice_text(int humanChoice)
 	int prediction;
 	wxString botString;
 
-	RPS->bot->pick(humanChoice,prediction);
+	RPS->bot->pick(humanChoice, prediction);
 	if(prediction == 0){
 		botString = "Rock";
 	}
@@ -315,7 +314,7 @@ void ButtonPanel::update_statistics()
 {
 
    human_win_text->SetLabelText(wxString::Format(wxT("%i"),RPS->getHumanWins()));
-   computer_win_text->SetLabelText(wxString::Format(wxT("%i"),RPS->getBotWins()));
+   bot_win_text->SetLabelText(wxString::Format(wxT("%i"),RPS->getBotWins()));
    draw_count_text->SetLabelText(wxString::Format(wxT("%i"),RPS->getDraws()));
 }
 
@@ -336,12 +335,12 @@ void ButtonPanel::update_new_game_screen(){
 
 	button_chosen_text->SetLabelText("");
 
-	computer_chosen_text->SetLabelText("");
+	bot_chosen_text->SetLabelText("");
 
 	winner_result_text->SetLabelText("");
 
 	human_win_text->SetLabelText("0");
-	computer_win_text->SetLabelText("0");
+	bot_win_text->SetLabelText("0");
 	draw_count_text->SetLabelText("0");
 
 }

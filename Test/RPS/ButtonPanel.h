@@ -60,10 +60,10 @@ private:
     Game *RPS;
     wxStaticText *round_count_text;
     wxStaticText *button_chosen_text;
-    wxStaticText *computer_chosen_text;
+    wxStaticText *bot_chosen_text;
     wxStaticText *winner_result_text;
     wxStaticText *human_win_text;
-    wxStaticText *computer_win_text;
+    wxStaticText *bot_win_text;
     wxStaticText *draw_count_text;
     wxStaticText *human_prediction_text;
     bool firstGame = true;

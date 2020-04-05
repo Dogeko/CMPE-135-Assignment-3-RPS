@@ -49,35 +49,12 @@ void DemoFrame::init_menu_bar()
     wxMenu *fileMenu = new wxMenu;
     wxMenu *startMenu = new wxMenu;
 
-//    startMenu->Append(RPS_NewGame, "&1 Round",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&2 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&3 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&4 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&5 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&6 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&7 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&8 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&9 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&10 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&11 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&12 Round",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&13 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&14 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&15 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&16 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&17 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&18 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&19 Rounds",   "Start a new game");
-//    startMenu->Append(RPS_NewGame, "&20 Rounds",   "Start a new game");
-
-
-
     fileMenu->Append(RPS_About, "&About\tF1",   "Show about dialog");
     fileMenu->Append(RPS_Quit,  "E&xit\tAlt-X", "Quit program");
-    startMenu->Append(RPS_NewGame, "&New Game");
+    startMenu->Append(RPS_NewGame, "&Start");
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, "&File");
-    menuBar->Append(startMenu,"Start");
+    menuBar->Append(startMenu,"New Game");
     //menuBar->Append(helpMenu, "&Help");
     SetMenuBar(menuBar);
 }

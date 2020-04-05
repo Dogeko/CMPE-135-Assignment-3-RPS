@@ -4,9 +4,11 @@ void ButtonPanel::init()
 {
     wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 
+    //round panel
     wxPanel *round_panel = new wxPanel(this, wxID_ANY);
     wxSizer *round_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText *round_text = new wxStaticText(round_panel, wxID_ANY, "Round:");
+
     round_text->SetFont(round_text->GetFont().Larger());
 
     round_sizer->Add(round_text, 0, wxALIGN_RIGHT, 0);
@@ -19,6 +21,7 @@ void ButtonPanel::init()
 
     round_panel->SetSizer(round_sizer);
 
+    //human panel
     wxPanel *human_panel = new wxPanel(this, wxID_ANY);
     wxSizer *human_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText *human_text = new wxStaticText(human_panel, wxID_ANY,
@@ -29,6 +32,7 @@ void ButtonPanel::init()
     human_sizer->AddSpacer(5);
     human_panel->SetSizer(human_sizer);
 
+    //button panel
     wxPanel *button_panel = new wxPanel(this, wxID_ANY);
     wxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -54,6 +58,7 @@ void ButtonPanel::init()
     button_sizer->Add(scissors_button, 0, 0, 0);
     button_panel->SetSizer(button_sizer);
 
+    //chosen panel
     wxPanel *chosen_panel = new wxPanel(this, wxID_ANY);
     wxSizer *chosen_sizer = new wxGridSizer(2, 0, 5);
 
@@ -65,6 +70,7 @@ void ButtonPanel::init()
     chosen_sizer->Add(button_chosen_text, 0, 0, 0);
     chosen_panel->SetSizer(chosen_sizer);
 
+    //bot panel
     wxPanel *computer_panel = new wxPanel(this, wxID_ANY);
     wxSizer *computer_sizer = new wxGridSizer(2, 0, 5);
 
@@ -75,6 +81,7 @@ void ButtonPanel::init()
     computer_sizer->Add(computer_chosen_text, 0, 0, 0);
     computer_panel->SetSizer(computer_sizer);
 
+    //human choice panel
     wxPanel *human_choice_panel = new wxPanel(this, wxID_ANY);
     wxSizer *human_choice_sizer = new wxGridSizer(wxHORIZONTAL);
     wxStaticText *human_choice_text = new wxStaticText(human_choice_panel, wxID_ANY,
@@ -85,6 +92,7 @@ void ButtonPanel::init()
     human_choice_sizer->Add(human_prediction_text, 0, 0, 0);
     human_choice_panel->SetSizer(human_choice_sizer);
 
+    //winner panel
     wxPanel *winner_panel = new wxPanel(this, wxID_ANY);
     wxSizer *winner_sizer = new wxGridSizer(wxHORIZONTAL);
     wxStaticText *winner_text = new wxStaticText(winner_panel, wxID_ANY, "The winner: ");
@@ -96,8 +104,11 @@ void ButtonPanel::init()
     winner_sizer->Add(winner_result_text, 0, 0, 0);
     winner_panel->SetSizer(winner_sizer);
 
+    //statistics panel
     wxPanel *statistic_panel = new wxPanel(this, wxID_ANY);
-    wxSizer *statistic_sizer = new wxGridSizer(wxHORIZONTAL);
+//    wxSizer *statistic_sizer = new wxGridSizer(wxHORIZONTAL);
+    wxSizer *statistic_sizer = new wxGridSizer(2, 0, 5);
+
     wxStaticText *statistic_text = new wxStaticText(statistic_panel, wxID_ANY,
                                                     "Statistics");
     wxStaticText *human_wins_text = new wxStaticText(statistic_panel, wxID_ANY,

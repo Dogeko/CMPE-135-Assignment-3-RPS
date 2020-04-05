@@ -59,7 +59,7 @@ void DemoFrame::init_menu_bar()
 void DemoFrame::on_about(wxCommandEvent& WXUNUSED(event))
 {
     wxMessageBox(wxString::Format(
-                    "This is a button demo\n"
+                    "This is a Rock Paper Scissors Simulator\n"
                     "built with %s\n"
                     "and running under %s.",
                     wxVERSION_STRING,

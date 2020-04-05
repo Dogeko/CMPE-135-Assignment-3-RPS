@@ -67,7 +67,7 @@ void Game::printResult(int result)
     }
 }
 
-void Game::getRound()
+int Game::getRound()
 {
     return round;
 }
@@ -84,7 +84,7 @@ int Game::getHumanWins()
 
 void Game::addHumanWin()
 {
-    return humanWins = humanWins + 1;
+    humanWins = humanWins + 1;
 }
 
 int Game::getBotWins()
@@ -94,7 +94,7 @@ int Game::getBotWins()
 
 void Game::addBotWin()
 {
-    return botWins = botWins + 1;
+    botWins = botWins + 1;
 }
 
 int Game::getDraws()

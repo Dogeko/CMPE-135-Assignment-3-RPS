@@ -3,7 +3,7 @@
 
 #include "ButtonDemo.h"
 #include "Choice.h"
-#include "Game.cpp"
+#include "Game.h"
 
 /**
  * The button panel of the application frame.
@@ -17,7 +17,7 @@ public:
      */
     ButtonPanel(wxFrame *parent) : wxPanel(parent, wxID_ANY)
     {
-        Game RPS = new Game();
+    	RPS = new Game;
         init();
     }
 
@@ -25,11 +25,7 @@ public:
     {
         delete RPS;
         RPS = new Game;
-        update_button_choice_text(0);
-        update_computer_choice_text(0);
-        update_winner_result_text("");
-        update_scoreboard();
-        update_round();
+        update_new_game_screen();
     }
 
     /**
@@ -64,7 +60,7 @@ private:
     wxStaticText *winner_result_text;
     wxStaticText *human_win_text;
     wxStaticText *computer_win_text;
-    wxStaticText *tie_count_text;
+    wxStaticText *draw_count_text;
     wxStaticText *human_prediction_text;
 
     /**
@@ -77,11 +73,13 @@ private:
      * @param choice the chosen object.
      */
     void update_button_choice_text(const Choice choice);
-    void update_computer_choice_text(const Choice choice);
-    void update_winner_result_text(const std::string winner);
-    void update_scoreboard();
+    void update_computer_choice_text(int humanChoice);
+//    void update_winner_result_text(const std::string winner);
+    void update_winner_result_text();
+    void update_statistics();
     void update_round();
     void update_human_prediction_text(const Choice choice);
+    void update_new_game_screen();
 };
 
 #endif /* BUTTONPANEL_H_ */

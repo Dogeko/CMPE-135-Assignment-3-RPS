@@ -12,7 +12,7 @@ void ButtonPanel::init()
     round_sizer->Add(round_text, 0, wxALIGN_RIGHT, 0);
 
     round_sizer->AddSpacer(20);
-    round_count_text = new wxStaticText(round_panel, wxID_ANY, "");
+    round_count_text = new wxStaticText(round_panel, wxID_ANY, "20");
     round_count_text->SetFont(round_count_text->GetFont().Larger());
     round_sizer->Add(round_count_text, 0, 0, 0);
     round_sizer->AddSpacer(20);
@@ -107,7 +107,7 @@ void ButtonPanel::init()
     wxStaticText *computer_wins_text = new wxStaticText(statistic_panel, wxID_ANY, "Computer wins: ");
     computer_win_text = new wxStaticText(statistic_panel, wxID_ANY, "");
     wxStaticText *tie_text = new wxStaticText(statistic_panel, wxID_ANY, "Ties: ");
-    tie_count_text = new wxStaticText(statistic_panel, wxID_ANY, "");
+    draw_count_text = new wxStaticText(statistic_panel, wxID_ANY, "");
 
     statistic_sizer->Add(statistic_text, 0, wxALIGN_CENTER, 0);
     statistic_sizer->AddSpacer(20);
@@ -116,7 +116,7 @@ void ButtonPanel::init()
     statistic_sizer->Add(computer_wins_text, 0, wxALIGN_CENTER, 0);
     statistic_sizer->Add(computer_win_text, 0, 0, 0);
     statistic_sizer->Add(tie_text, 0, wxALIGN_CENTER, 0);
-    statistic_sizer->Add(tie_count_text, 0, 0, 0);
+    statistic_sizer->Add(draw_count_text, 0, 0, 0);
     statistic_panel->SetSizer(statistic_sizer);
 
     sizer->Add(round_panel, 0, wxALIGN_CENTER, 0);
@@ -141,14 +141,16 @@ void ButtonPanel::init()
 
 void ButtonPanel::on_rock(wxCommandEvent &event)
 {
-    if (roshambo->getRound() < 20)
+    if (RPS->getRound() > 1)
     {
-        update_button_choice_text(ROCK);
-        update_winner_result_text(roshambo->playMLRound(ROCK));
-        update_human_prediction_text(roshambo->getPlayerPrediction());
-        update_computer_choice_text(roshambo->getComputerChoice());
-        update_round();
-        update_scoreboard();
+    	update_button_choice_text(ROCK);
+
+    	update_computer_choice_text(RPS->human.getChoice());
+        update_winner_result_text();
+
+        update_statistics();
+        RPS->setRound(RPS->getRound() - 1);
+    	update_round();
     }
     else
     {
@@ -160,14 +162,17 @@ void ButtonPanel::on_rock(wxCommandEvent &event)
 
 void ButtonPanel::on_paper(wxCommandEvent &event)
 {
-    if (roshambo->getRound() < 20)
+    if (RPS->getRound() > 1)
     {
-        update_button_choice_text(PAPER);
-        update_winner_result_text(roshambo->playMLRound(PAPER));
-        update_computer_choice_text(roshambo->getComputerChoice());
-        update_human_prediction_text(roshambo->getPlayerPrediction());
-        update_round();
-        update_scoreboard();
+       update_button_choice_text(PAPER);
+
+       update_computer_choice_text(RPS->human.getChoice());
+       update_winner_result_text();
+
+       update_statistics();
+       RPS->setRound(RPS->getRound() - 1);
+       update_round();
+
     }
     else
     {
@@ -179,14 +184,17 @@ void ButtonPanel::on_paper(wxCommandEvent &event)
 
 void ButtonPanel::on_scissors(wxCommandEvent &event)
 {
-    if (roshambo->getRound() < 20)
+    if (RPS->getRound() > 1)
     {
         update_button_choice_text(SCISSORS);
-        update_winner_result_text(roshambo->playMLRound(SCISSORS));
-        update_computer_choice_text(roshambo->getComputerChoice());
-        update_human_prediction_text(roshambo->getPlayerPrediction());
+
+
+        update_computer_choice_text(RPS->human.getChoice());
+        update_winner_result_text();
+
+        update_statistics();
+        RPS->setRound(RPS->getRound() - 1);
         update_round();
-        update_scoreboard();
     }
     else
     {
@@ -199,31 +207,95 @@ void ButtonPanel::on_scissors(wxCommandEvent &event)
 void ButtonPanel::update_button_choice_text(const Choice choice)
 {
     button_chosen_text->SetLabelText(choice_to_wxString(choice));
+
+    switch(choice){
+
+    	case PAPER: RPS->human.setChoice(0); break;
+
+    	case SCISSORS: RPS->human.setChoice(1); break;
+
+    	case ROCK: RPS->human.setChoice(2); break;
+    }
+
 }
 
-void ButtonPanel::update_computer_choice_text(const Choice choice)
+void ButtonPanel::update_computer_choice_text(int humanChoice)
 {
-    computer_chosen_text->SetLabelText(choice_to_wxString(choice));
+	int botChoice;
+	wxString botString;
+
+	RPS->bot->pick(humanChoice);
+
+	botChoice = RPS->bot->getChoice();
+	if(botChoice == 0){
+		botString = "Paper";
+	}
+	else if(botChoice == 1){
+		botString = "Scissors";
+	}
+	else{
+		botString = "Rock";
+	}
+
+    computer_chosen_text->SetLabelText(botString);
 }
 
-void ButtonPanel::update_winner_result_text(const std::string winner)
+void ButtonPanel::update_winner_result_text()
 {
-    winner_result_text->SetLabelText(string_to_wxString(winner));
+	int result;
+	wxString winnerString;
+
+	result = RPS->result(RPS->human.getChoice(), RPS->bot->getChoice());
+	if (result == 0)
+	    {
+	     	 winnerString = "Draw";
+	     	 RPS->addDraw();
+	    }
+	    else if (result == 1)
+	    {
+	    	winnerString = "Human";
+	    	RPS->addHumanWin();
+	    }
+	    else
+	    {
+	       winnerString = "Bot";
+	       RPS->addBotWin();
+	    }
+	 winner_result_text->SetLabelText(winnerString);
+
 }
 
-void ButtonPanel::update_scoreboard()
+void ButtonPanel::update_statistics()
 {
-    human_win_text->SetLabelText(int_to_wxString(roshambo->getPlayerScore(HUMAN)));
-    computer_win_text->SetLabelText(int_to_wxString(roshambo->getPlayerScore(COMPUTER)));
-    tie_count_text->SetLabelText(int_to_wxString(roshambo->getPlayerScore(TIE)));
+
+   human_win_text->SetLabelText(wxString::Format(wxT("%i"),RPS->getHumanWins()));
+   computer_win_text->SetLabelText(wxString::Format(wxT("%i"),RPS->getBotWins()));
+   draw_count_text->SetLabelText(wxString::Format(wxT("%i"),RPS->getDraws()));
 }
 
 void ButtonPanel::update_round()
 {
-    round_count_text->SetLabelText(int_to_wxString(roshambo->getRound()));
+	//RPS->setRound(RPS->getRound() - 1);
+	round_count_text->SetLabelText(wxString::Format(wxT("%i"),RPS->getRound()));
 }
 
 void ButtonPanel::update_human_prediction_text(const Choice choice)
 {
-    human_prediction_text->SetLabelText(choice_to_wxString(choice));
+//    human_prediction_text->SetLabelText(choice_to_wxString(choice));
+}
+void ButtonPanel::update_new_game_screen(){
+
+	round_count_text->SetLabelText("20");
+
+
+	button_chosen_text->SetLabelText("");
+
+	computer_chosen_text->SetLabelText("");
+
+	winner_result_text->SetLabelText("");
+
+	human_win_text->SetLabelText("0");
+	computer_win_text->SetLabelText("0");
+	draw_count_text->SetLabelText("0");
+
 }

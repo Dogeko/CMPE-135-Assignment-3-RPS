@@ -4,13 +4,13 @@ void Game::play()
 {
 
     round = 20;
-
+    int prediction;
     bot = BotFactory::pickAlgo('S');
     while (check != 'n') {
         for (int i = 0; i < round; i++) {
             cout << "Round " << i + 1 << endl;
             human.playerPick();
-            bot->pick(human.getChoice());
+            bot->pick(human.getChoice(), prediction);
             printResult(result(human.getChoice(), bot->getChoice()));
         }
         check = 'n';

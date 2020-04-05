@@ -12,7 +12,7 @@ protected:
 public:
 	int getChoice();
 	void setChoice(int value);
-	virtual void pick(int );
+	virtual void pick(int, int );
 };
 
 #endif

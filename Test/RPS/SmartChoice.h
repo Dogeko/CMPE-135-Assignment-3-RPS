@@ -15,7 +15,7 @@ private:
     int smart_choice[5]= {3};
 
 public:
-    void pick(int playerChoice);
+    void pick(int playerChoice, int prediction);
 };
 
 #endif

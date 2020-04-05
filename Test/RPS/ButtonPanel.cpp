@@ -83,34 +83,40 @@ void ButtonPanel::init()
 
     //human choice panel
     wxPanel *human_choice_panel = new wxPanel(this, wxID_ANY);
-    wxSizer *human_choice_sizer = new wxGridSizer(wxHORIZONTAL);
+    wxSizer *human_choice_sizer = new wxGridSizer(2, 0, 5);
+
+    //wxSizer *human_choice_sizer = new wxGridSizer(wxHORIZONTAL);
     wxStaticText *human_choice_text = new wxStaticText(human_choice_panel, wxID_ANY,
                                                        "Predicted human choice: ");
     human_prediction_text = new wxStaticText(human_choice_panel, wxID_ANY, "");
+    human_prediction_text->SetFont(human_prediction_text->GetFont().Larger());
     human_choice_sizer->Add(human_choice_text, 0, wxALIGN_RIGHT, 0);
-    human_choice_sizer->AddSpacer(5);
+//    human_choice_sizer->AddSpacer(5);
     human_choice_sizer->Add(human_prediction_text, 0, 0, 0);
     human_choice_panel->SetSizer(human_choice_sizer);
 
     //winner panel
     wxPanel *winner_panel = new wxPanel(this, wxID_ANY);
-    wxSizer *winner_sizer = new wxGridSizer(wxHORIZONTAL);
+    wxSizer *winner_sizer = new wxGridSizer(2, 0, 5);
     wxStaticText *winner_text = new wxStaticText(winner_panel, wxID_ANY, "The winner: ");
     winner_result_text = new wxStaticText(winner_panel, wxID_ANY, "");
-    winner_text->SetFont(winner_text->GetFont().Larger());
+    //winner_text->SetFont(winner_text->GetFont().Larger());
     winner_result_text->SetFont(winner_result_text->GetFont().Larger());
 
     winner_sizer->Add(winner_text, 0, wxALIGN_RIGHT, 0);
     winner_sizer->Add(winner_result_text, 0, 0, 0);
     winner_panel->SetSizer(winner_sizer);
 
+
     //statistics panel
     wxPanel *statistic_panel = new wxPanel(this, wxID_ANY);
-//    wxSizer *statistic_sizer = new wxGridSizer(wxHORIZONTAL);
+    //wxSizer *statistic_sizer = new wxGridSizer(wxHORIZONTAL);
     wxSizer *statistic_sizer = new wxGridSizer(2, 0, 5);
 
     wxStaticText *statistic_text = new wxStaticText(statistic_panel, wxID_ANY,
                                                     "Statistics");
+    statistic_text->SetFont(statistic_text->GetFont().Larger());
+
     wxStaticText *human_wins_text = new wxStaticText(statistic_panel, wxID_ANY,
                                                      "Human wins: ");
     human_win_text = new wxStaticText(statistic_panel, wxID_ANY, "");
@@ -157,6 +163,7 @@ void ButtonPanel::on_rock(wxCommandEvent &event)
     	update_button_choice_text(ROCK);
 
     	update_computer_choice_text(RPS->human.getChoice());
+    	update_computer_prediction_choice_text(RPS->human.getChoice());
         update_winner_result_text();
 
         update_statistics();
@@ -180,6 +187,7 @@ void ButtonPanel::on_paper(wxCommandEvent &event)
        update_button_choice_text(PAPER);
 
        update_computer_choice_text(RPS->human.getChoice());
+       update_computer_prediction_choice_text(RPS->human.getChoice());
        update_winner_result_text();
 
        update_statistics();
@@ -205,6 +213,7 @@ void ButtonPanel::on_scissors(wxCommandEvent &event)
 
 
         update_computer_choice_text(RPS->human.getChoice());
+        update_computer_prediction_choice_text(RPS->human.getChoice());
         update_winner_result_text();
 
         update_statistics();
@@ -239,9 +248,10 @@ void ButtonPanel::update_button_choice_text(const Choice choice)
 void ButtonPanel::update_computer_choice_text(int humanChoice)
 {
 	int botChoice;
+	int prediction;
 	wxString botString;
+	RPS->bot->pick(humanChoice, prediction);
 
-	RPS->bot->pick(humanChoice);
 
 	botChoice = RPS->bot->getChoice();
 	if(botChoice == 0){
@@ -255,6 +265,25 @@ void ButtonPanel::update_computer_choice_text(int humanChoice)
 	}
 
     computer_chosen_text->SetLabelText(botString);
+}
+
+void ButtonPanel::update_computer_prediction_choice_text(int humanChoice)
+{
+	int prediction;
+	wxString botString;
+
+	RPS->bot->pick(humanChoice,prediction);
+	if(prediction == 0){
+		botString = "Rock";
+	}
+	else if(prediction == 1){
+		botString = "Paper";
+	}
+	else{
+		botString = "Scissors";
+	}
+
+    human_prediction_text->SetLabelText(botString);
 }
 
 void ButtonPanel::update_winner_result_text()

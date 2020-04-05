@@ -79,6 +79,7 @@ private:
      */
     void update_button_choice_text(const Choice choice);
     void update_computer_choice_text(int humanChoice);
+    void update_computer_prediction_choice_text(int humanChoice);
 //    void update_winner_result_text(const std::string winner);
     void update_winner_result_text();
     void update_statistics();

@@ -7,7 +7,7 @@ void Game::play()
     char algo_type;
     char check = 'a';
     cout << "Choose BOT algorithm:" << endl;
-    cout << "Type 'R' for random OR 'S' for smart" << endl;
+    cout << "Type 'R' for random AI or 'S' for state AI" << endl;
     cin >> algo_type;
 
     bot = BotFactory::pickAlgo(algo_type);

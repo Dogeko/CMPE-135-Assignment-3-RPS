@@ -29,7 +29,8 @@ void Human::playerPick()
 		break;
 	case 4:
 		setChoice(4);
-		cout<<"Karate Chop unlocked \n"<<endl;
+		charges = charges - 3;
+		cout<<"Karate Chop used \n"<<endl;
 		break;
 	default:
         playerPick();

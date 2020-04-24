@@ -12,16 +12,16 @@ void Human::setChoice(int value)
 
 void Human::playerPick()
 {
-	cout << "1 = Charge, 2 = Block, 3 = Fireball ";
+	cout << "1 = Block, 2 = Charge, 3 = Fireball ";
 	cin >> choice;
 	switch (choice)
 	{
 	case 1:
 		setChoice(0);
-		charges = charges+1;
 		break;
 	case 2:
 		setChoice(1);
+		charges = charges + 1;
 		break;
 	case 3:
 		setChoice(2);

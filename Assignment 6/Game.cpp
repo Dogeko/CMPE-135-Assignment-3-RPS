@@ -21,4 +21,25 @@ void Game::play()
             gameover = true;
         }
     }
+
+}
+
+void Game::endGame(){
+
+	char decision;
+	cout<<"Do you want to play again?\n"<<endl;
+	cout<<"Type'y' for Yes OR type 'n' for no\n"<<endl;
+	cin>> decision;
+
+	if(cin == 'y'){play()}
+
+	else{
+
+		cout<<"Game Over!"<<endl;
+		//GameRecord()
+		//printout results
+	}
+
+
+
 }

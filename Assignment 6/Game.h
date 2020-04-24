@@ -15,6 +15,7 @@ private:
     bool gameOver = false;
 public:
     void play();
+    void endGame();
     int result(int humanChoice, int BotChoice);
     void displayResult(int result);
 

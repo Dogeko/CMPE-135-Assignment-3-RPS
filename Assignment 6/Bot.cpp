@@ -9,15 +9,15 @@ void Bot::botPick(int value)
 {
 	switch (value)
 	{
-	case 1:
+	case 0:
 		break;
-	case 2:
+	case 1:
 		charges = charges + 1;
 		break;
-	case 3:
+	case 2:
 		charges = charges - 1;
 		break;
-	case 4:
+	case 3:
 		charges = charges - 3;
 		break;
 	default:

@@ -2,5 +2,6 @@
 
 void RandomAI::pick(int botChoice)
 {
-	botPick(rand() % 3);
+
+	return rand() % 3;//purely random choice no matter what state bot is currently in
 }

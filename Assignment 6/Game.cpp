@@ -22,6 +22,7 @@ void Game::play()
         }
     }
 
+
 }
 
 void Game::endGame(){
@@ -41,5 +42,6 @@ void Game::endGame(){
 	}
 
 
-
 }
+
+

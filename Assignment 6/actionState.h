@@ -13,7 +13,7 @@ private:
     final static int CHARGES3 = 3;
     int state = NO_CHARGES;
 public:
-    void pick(int botChoice);
+    virtual int pick() = 0;
 };
 
 #endif

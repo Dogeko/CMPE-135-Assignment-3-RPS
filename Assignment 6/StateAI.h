@@ -23,9 +23,38 @@ public:
 	actionState state;
 
 	void pick(int botChoice);
+
 	StateAI(){
-		state = NO_CHARGES;
+		NO_CHARGES = new Charges0(this);
+		CHARGES_1 = new Charges1(this);
+	    CHARGES_2 = new Charges2(this);
+	    CHARGES_3 = new Charges3(this);
+	    state = NO_CHARGES;
 	}
+
+	void setState(actionState newState){
+
+		state = newState;
+	}
+
+	actionState getNoChargeState(){
+
+		return NO_CHARGES;
+	}
+
+	actionState getCharge1State(){
+
+		return CHARGES_1;
+	}
+	actionState getCharges2State(){
+
+		return CHARGES_2;
+	}
+	actionState getCharges3State(){
+
+		return CHARGES_3;
+	}
+
 };
 
 #endif

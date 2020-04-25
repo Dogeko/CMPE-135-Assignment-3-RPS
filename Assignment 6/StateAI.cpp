@@ -2,5 +2,5 @@
 
 void StateAI::pick(int botChoice)
 {
-	actionState->pick(botChoice);
+	state->pick(botChoice);
 }

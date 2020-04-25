@@ -2,5 +2,12 @@
 
 void Charges3::pick(int botChoice)
 {
-	return 3;//choose karate chop
+	int choice = 3;//choose karate chop
+
+	//block = 0, charge = 1, fireball = 2
+
+
+	AI.setState(AI.getCharges0State());
+
+
 }

@@ -7,7 +7,7 @@ void Charges0::pick(int botChoice)
 	//block = 0, charge = 1, fireball = 2
 
 	if(choice == 1){
-		AI.setState(AI.getCharges1State());
+		AI->setState(AI->getCharges1State());
 
 	}
 
